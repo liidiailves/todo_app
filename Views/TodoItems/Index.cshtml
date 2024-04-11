@@ -1,0 +1,56 @@
+﻿@model List<Todo_app.Data.TodoItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pöördumised</h1>
+
+<h3 class="text-center">
+    <a asp-action="Create">Loo uus pöördumine</a>
+</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Kirjeldus
+            </th>
+            <th>
+                Sisestamise aeg
+            </th>
+            <th>
+                Lahendamise tähtaeg
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="@(item.ItemDueDate <= DateTime.Now.AddMinutes(5) ? "text-danger" : "")">
+                    @item.Description
+                </td>
+                <td class="@(item.ItemDueDate <= DateTime.Now.AddMinutes(5) ? "text-danger" : "")">
+                    @item.ItemDate.ToString("dddd, dd MMMM yyyy HH:mm")
+                </td>
+                <td class="@(item.ItemDueDate <= DateTime.Now.AddMinutes(5) ? "text-danger" : "")">
+                    @item.ItemDueDate.ToString("dddd, dd MMMM yyyy HH:mm")
+                </td>
+                <td>
+                    <a class="@(item.ItemDueDate <= DateTime.Now.AddMinutes(5) ? "btn btn-danger" : "btn btn-success")" asp-action="Delete" asp-route-id="@item.Id">Tehtud</a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Muuda</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Vaata</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Kustuta</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+

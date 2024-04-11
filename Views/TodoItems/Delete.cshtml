@@ -1,0 +1,38 @@
+﻿@model Todo_app.Data.TodoItem
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Kustuta pöördumine</h1>
+
+<h3>Oled kindel, et soovid pöördumise kustutada?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Kirjeldus
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Description
+        </dd>
+        <dt class="col-sm-2">
+            Sisestamise aeg
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ItemDate.ToString("dddd, dd MMMM yyyy HH:mm")
+        </dd>
+        <dt class="col-sm-2">
+            Lahendamise tähtaeg
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ItemDueDate.ToString("dddd, dd MMMM yyyy HH:mm")
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Kustuta" class="btn btn-danger" /> |
+        <a asp-action="Index">Tagasi pöördumiste nimekirja</a>
+    </form>
+</div>
